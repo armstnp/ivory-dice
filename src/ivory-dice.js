@@ -5,8 +5,8 @@
  *
  * @name ivoryDice
  * @function
- * @param {Function} generator A random generator accepting two arguments, an integer min and an integer max, and returning an integer that is between the two inclusive. The function may contractually expect min <= max.
- * @param {Integer} sides The number of sides of the die to be rolled.  Must be >= 1.
+ * @param {Function} generator A random generator accepting two arguments, an integer min and an integer max, and returning an integer that is between the two inclusivey. The function may contractually expect min <= max.
+ * @param {Integer} sides The number of sides of the die to be rolled.  Must be >= 1. Default: 6
  *
  * @return {Number} The die roll result
  */
