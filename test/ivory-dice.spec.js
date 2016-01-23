@@ -21,4 +21,8 @@ describe('ivoryDice', () => {
 	it('should throw on violation of generator integer constraint by receiving a non-numeric type', () => {
 		expect(ivoryDice.bind({}, (min, max) => '1')).to.throw();
 	});
+
+	it('should throw on violation of input constraint by receiving a number of sides < 1', () => {
+		expect(ivoryDice.bind({}, (min, max) => '1', 0)).to.throw();
+	});
 });
