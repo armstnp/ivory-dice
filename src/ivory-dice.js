@@ -12,15 +12,16 @@
  */
 
 import R from 'ramda';
+import { ContractError } from './errors.js';
 
 function validateDieSpecifications(min, max){
-	if(min > max) throw `Input contract violated: minimum roll {min} is greater than maximum roll {max}`;
+	if(min > max) throw new RangeError(`Input contract violated: minimum roll {min} is greater than maximum roll {max}`);
 };
 
 function validateRoll(min, max, roll){
-	if(!Number.isInteger(roll)) throw `Generator contract violated: Result {roll} is not an integer`;
-	if(roll < min) throw `Generator contract violated: Result {roll} is less than the requested minimum {min}`;
-	if(roll > max) throw `Generator contract violated: Result {roll} is greater than the requested maximum {max}`;
+	if(!Number.isInteger(roll)) throw new TypeError(`Generator contract violated: Result {roll} is not an integer`);
+	if(roll < min) throw new ContractError(`Generator contract violated: Result {roll} is less than the requested minimum {min}`);
+	if(roll > max) throw new ContractError(`Generator contract violated: Result {roll} is greater than the requested maximum {max}`);
 };
 
 function rollOnce(generator, min, max){
