@@ -2,7 +2,7 @@
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][depstat-image]][depstat-url]
 
-> Description
+> Rolls any-sided die with customizable input generators.
 
 ## Installation
 
