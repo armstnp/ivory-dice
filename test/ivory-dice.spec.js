@@ -26,7 +26,9 @@ describe('ivoryDice', () => {
 		it('should throw on violation of generator integer constraint by receiving a non-numeric type', () => {
 			expectInvalidGeneratorToBreakContract((min, max) => '1');
 		});
+	});
 
+	describe('the die description contract', () => {
 		it('should throw on violation of input constraint by receiving a number of sides < 1', () => {
 			expect(ivoryDice.bind({}, (min, max) => min, 0)).to.throw();
 		});

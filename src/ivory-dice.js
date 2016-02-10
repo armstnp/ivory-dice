@@ -13,22 +13,16 @@
 
 import R from 'ramda';
 import { ContractError } from './errors.js';
+import { VerifiableGenerator } from './verifiable-generator.js';
 
 function validateDieSpecifications(min, max){
 	if(min > max) throw new RangeError(`Input contract violated: minimum roll {min} is greater than maximum roll {max}`);
 };
 
-function validateRoll(min, max, roll){
-	if(!Number.isInteger(roll)) throw new TypeError(`Generator contract violated: Result {roll} is not an integer`);
-	if(roll < min) throw new ContractError(`Generator contract violated: Result {roll} is less than the requested minimum {min}`);
-	if(roll > max) throw new ContractError(`Generator contract violated: Result {roll} is greater than the requested maximum {max}`);
-};
-
 function rollOnce(generator, min, max){
 	validateDieSpecifications(min, max);
-	const roll = generator(min, max);
-	validateRoll(min, max, roll);
-	return roll;
+	const verifiableGenerator = new VerifiableGenerator(generator);
+	return verifiableGenerator.generate(min, max);
 };
 
 export default function(generator, sides = 6){
