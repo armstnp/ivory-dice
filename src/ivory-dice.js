@@ -21,8 +21,7 @@ function validateDieSpecifications(min, max){
 
 function rollOnce(generator, min, max){
 	validateDieSpecifications(min, max);
-	const verifiableGenerator = new VerifiableGenerator(generator);
-	return verifiableGenerator.generate(min, max);
+	return generator.generate(min, max);
 };
 
 export default function(generator, sides = 6){
