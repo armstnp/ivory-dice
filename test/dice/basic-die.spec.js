@@ -1,5 +1,5 @@
 import { BasicDie } from '../../src/dice/basic-die.js';
-import { MinGenerator, MaxGenerator } from '../src/standard-generators.js';
+import { MinGenerator, MaxGenerator } from '../../src/generators/standard-generators.js';
 import R from 'ramda';
 
 const createBasicDie = (sides) => new BasicDie(sides);

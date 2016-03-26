@@ -1,4 +1,4 @@
-import { BasicGenerator, MinGenerator, MaxGenerator } from '../src/standard-generators.js';
+import { BasicGenerator, MinGenerator, MaxGenerator } from '../../src/generators/standard-generators.js';
 
 function createGeneratorWithNonFunction(){
   return new BasicGenerator(1);

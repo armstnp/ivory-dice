@@ -13,7 +13,7 @@
 
 import R from 'ramda';
 import { ContractError } from './errors.js';
-import { VerifiableGenerator } from './verifiable-generator.js';
+import { VerifiableGenerator } from './generators/verifiable-generator.js';
 
 function validateDieSpecifications(min, max){
 	if(min > max) throw new RangeError(`Input contract violated: minimum roll {min} is greater than maximum roll {max}`);

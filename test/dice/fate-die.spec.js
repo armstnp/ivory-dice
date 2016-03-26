@@ -1,5 +1,5 @@
 import { FateDie } from '../../src/dice/fate-die.js';
-import { MinGenerator, MaxGenerator } from '../src/standard-generators.js';
+import { MinGenerator, MaxGenerator } from '../../src/generators/standard-generators.js';
 import R from 'ramda';
 
 describe('FateDie', () => {

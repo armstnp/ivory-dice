@@ -1,5 +1,5 @@
 import R from 'ramda';
-import { ContractError } from './errors.js';
+import { ContractError } from '../errors.js';
 
 function verifyIntegerValue(value){
   if(!Number.isInteger(value)) throw new TypeError(`Generator contract violated: Result {value} is not an integer`);

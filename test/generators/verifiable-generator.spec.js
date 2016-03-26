@@ -1,4 +1,4 @@
-import { VerifiableGenerator } from '../src/verifiable-generator.js';
+import { VerifiableGenerator } from '../../src/generators/verifiable-generator.js';
 
 function expectInvalidGeneratorToBreakContract(generator){
   let generate = () => generator.generate(1, 6);

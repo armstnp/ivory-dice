@@ -1,5 +1,5 @@
 import { ConstantDie } from '../../src/dice/constant-die.js';
-import { MinGenerator, MaxGenerator } from '../src/standard-generators.js';
+import { MinGenerator, MaxGenerator } from '../../src/generators/standard-generators.js';
 import R from 'ramda';
 
 const createConstantDie = (value) => new ConstantDie(value);
