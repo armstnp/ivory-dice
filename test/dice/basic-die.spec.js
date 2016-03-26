@@ -1,4 +1,4 @@
-import { BasicDie } from '../src/basic-die.js';
+import { BasicDie } from '../../src/dice/basic-die.js';
 import { MinGenerator, MaxGenerator } from '../src/standard-generators.js';
 import R from 'ramda';
 

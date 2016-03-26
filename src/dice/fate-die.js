@@ -1,4 +1,4 @@
-import { ContractError } from './errors.js';
+import { ContractError } from '../errors.js';
 
 export const FateDie = {
   roll(generator) {

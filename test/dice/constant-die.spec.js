@@ -1,4 +1,4 @@
-import { ConstantDie } from '../src/constant-die.js';
+import { ConstantDie } from '../../src/dice/constant-die.js';
 import { MinGenerator, MaxGenerator } from '../src/standard-generators.js';
 import R from 'ramda';
 

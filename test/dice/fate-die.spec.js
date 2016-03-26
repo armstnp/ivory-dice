@@ -1,4 +1,4 @@
-import { FateDie } from '../src/fate-die.js';
+import { FateDie } from '../../src/dice/fate-die.js';
 import { MinGenerator, MaxGenerator } from '../src/standard-generators.js';
 import R from 'ramda';
 
