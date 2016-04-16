@@ -9,8 +9,8 @@ const createConditionalCountPool = (die, quantity, predicate) => new Conditional
 const d1 = new ConstantDie(1);
 const d6 = new BasicDie(6);
 
-describe('ConditionalCountPool', () => {
-  describe('the pool contract', () => {
+describe('A conditional count pool', () => {
+  describe('when created', () => {
     it('should throw on violation of input constraint by receiving a die quantity < 0', () => {
       expect(createConditionalCountPool.bind({}, d1, -1, (value) => true)).to.throw();
     });
@@ -28,7 +28,7 @@ describe('ConditionalCountPool', () => {
     });
   });
 
-  describe('the pool', () => {
+  describe('when rolled', () => {
     it('should return an empty result totalling 0 when no dice are given', () => {
       let result = new ConditionalCountPool(d6, 0, (rollValue) => true).roll(MinGenerator);
       expect(result.rolls).to.be.empty;

@@ -4,8 +4,8 @@ import R from 'ramda';
 
 const createConstantDie = (value) => new ConstantDie(value);
 
-describe('ConstantDie', () => {
-  describe('the die contract', () => {
+describe('A constant die', () => {
+  describe('when created', () => {
     it('should throw on violation of input constraint by receiving a non-numeric roll value', () => {
       expect(createConstantDie.bind({}, '6')).to.throw();
     });
@@ -15,7 +15,7 @@ describe('ConstantDie', () => {
     });
   });
 
-  describe('the die', () => {
+  describe('when rolled', () => {
     it('should provide its value when rolled with a min-fixed generator', () => {
       expect(new ConstantDie(6).roll(MinGenerator)).to.equal(6);
     });

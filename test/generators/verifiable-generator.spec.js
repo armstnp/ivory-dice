@@ -5,13 +5,13 @@ function expectInvalidGeneratorToBreakContract(generator){
   expect(generate).to.throw();
 };
 
-describe('VerifiableGenerator', () => {
-	it('should return the result of calling the generator function', () => {
-		let generator = new VerifiableGenerator((min, max) => 3);
-		expect(generator.generate(1, 6)).to.equal(3);
-	});
+describe('A verifiable generator', () => {
+	describe('when asked to generate a value', () => {
+  	it('should return the result of calling the generator function', () => {
+  		let generator = new VerifiableGenerator((min, max) => 3);
+  		expect(generator.generate(1, 6)).to.equal(3);
+  	});
 
-	describe('the generator contract', () => {
 		it('should throw on violation of generator function minimum constraints', () => {
       let generator = new VerifiableGenerator((min, max) => min - 1);
 			expectInvalidGeneratorToBreakContract(generator);

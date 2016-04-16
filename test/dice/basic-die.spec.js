@@ -4,8 +4,8 @@ import R from 'ramda';
 
 const createBasicDie = (sides) => new BasicDie(sides);
 
-describe('BasicDie', () => {
-  describe('the die contract', () => {
+describe('A basic die', () => {
+  describe('when created', () => {
     it('should throw on violation of input constraint by receiving a number of sides < 1', () => {
       expect(createBasicDie.bind({}, 0)).to.throw();
     });
@@ -19,7 +19,7 @@ describe('BasicDie', () => {
     });
   });
 
-  describe('the die', () => {
+  describe('when rolled', () => {
     it('should request a minimum roll of 1', () => {
       expect(new BasicDie(6).roll(MinGenerator)).to.equal(1);
     });
