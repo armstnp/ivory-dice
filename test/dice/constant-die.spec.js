@@ -16,12 +16,22 @@ describe('A constant die', () => {
   });
 
   describe('when rolled', () => {
+    const c6 = new ConstantDie(6);
+
     it('should provide its value when rolled with a min-fixed generator', () => {
-      expect(new ConstantDie(6).roll(MinGenerator)).to.equal(6);
+      expect(c6.roll(MinGenerator).value).to.equal(6);
     });
 
     it('should provide its value when rolled with a max-fixed generator', () => {
-        expect(new ConstantDie(6).roll(MaxGenerator)).to.equal(6);
+      expect(c6.roll(MaxGenerator).value).to.equal(6);
     });
-  })
+
+    it('should be minimal', () => {
+      expect(c6.roll(MaxGenerator).isMinimal).to.be.true;
+    });
+
+    it('should be maximal', () => {
+      expect(c6.roll(MinGenerator).isMaximal).to.be.true;
+    });
+  });
 });
