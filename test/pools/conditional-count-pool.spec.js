@@ -6,7 +6,7 @@ import { SweepGenerator } from '../../src/generators/sweep-generator.js';
 import R from 'ramda';
 
 const createConditionalCountPool = (die, quantity, predicate) => new ConditionalCountPool(die, quantity, predicate);
-const d1 = new BasicDie(1);
+const d1 = new ConstantDie(1);
 const d6 = new BasicDie(6);
 
 describe('A conditional count pool', () => {

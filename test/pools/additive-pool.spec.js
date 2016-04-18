@@ -5,7 +5,7 @@ import { MinGenerator, MaxGenerator } from '../../src/generators/standard-genera
 import R from 'ramda';
 
 const createAdditivePool = (die, quantity) => new AdditivePool(die, quantity);
-const d1 = new BasicDie(1);
+const d1 = new ConstantDie(1);
 const d6 = new BasicDie(6);
 
 describe('An additive pool', () => {
