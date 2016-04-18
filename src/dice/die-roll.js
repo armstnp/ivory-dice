@@ -3,9 +3,9 @@ const MinimalSymbol = Symbol('Minimal');
 const CriticalSymbol = Symbol('Critical');
 
 const RollAspects = {
-	[MaximalSymbol]: roll => { roll.isMaximal = true; },
-	[MinimalSymbol]: roll => { roll.isMinimal = true; },
-	[CriticalSymbol]: roll => { roll.isCritical = true; }
+	[MaximalSymbol]: roll => { return { ...roll, isMaximal: true } },
+	[MinimalSymbol]: roll => { return { ...roll, isMinimal: true } },
+	[CriticalSymbol]: roll => { return { ...roll, isCritical: true } }
 };
 
 export const Aspects = {
@@ -14,33 +14,38 @@ export const Aspects = {
 	Critical: CriticalSymbol
 };
 
+const withMutators = roll => {
+	roll.with = {
+		faceRender: function(faceRender) {
+			return withMutators({
+				...roll,
+				faceRender
+			});
+		},
+		aspects: function(...aspects) {
+			let newRoll = roll;
+			for(let aspect of aspects) {
+				newRoll = RollAspects[aspect](newRoll);
+			}
+			return withMutators(newRoll);
+		}
+	};
+	return roll;
+};
+
 export const RollBuilder = function(value) {
-	return {
+	return withMutators({
 		value: value,
 		faceRender: String(value),
 		isMaximal: false,
 		isMinimal: false,
 		isCritical: false,
-		withFaceRender: function(faceRender) { //TODO: Contractually require string
-			this.faceRender = faceRender;
-			delete this.withFaceRender;
-			return this;
-		},
-		withAspects: function(...aspects) { //TODO: Contractually require arry of Aspects
-			for(let aspect of aspects) {
-				RollAspects[aspect](this);
-			}
-			delete this.withAspects;
-			return this;
-		},
 		finalize: function() {
 			return {
-				value: this.value,
-				faceRender: this.faceRender,
-				isMaximal: this.isMaximal,
-				isMinimal: this.isMinimal,
-				isCritical: this.isCritical
-			};
+				...this,
+				with: undefined,
+				finalize: undefined
+			}
 		}
-	};
+	});
 };
