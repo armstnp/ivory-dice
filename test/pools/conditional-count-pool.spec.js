@@ -42,7 +42,6 @@ describe('A conditional count pool', () => {
 
     it('should use the provided generator to roll its dice', () => {
       let result = new ConditionalCountPool(d6, 5, (rollValue) => true).roll(MaxGenerator);
-      let rollValue6 = { ...(d6.roll(MaxGenerator).finalize()), passed: true };
       expect(result.rolls.map(roll => roll.value)).to.eql([6, 6, 6, 6, 6]);
       expect(result.rolls.map(roll => roll.passed)).to.eql([true, true, true, true, true]);
       expect(result.total).to.equal(5);
