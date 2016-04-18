@@ -20,12 +20,35 @@ describe('A basic die', () => {
   });
 
   describe('when rolled', () => {
+    const d6MinRoll = new BasicDie(6).roll(MinGenerator);
+    const d6MaxRoll = new BasicDie(6).roll(MaxGenerator);
+
     it('should request a minimum roll of 1', () => {
-      expect(new BasicDie(6).roll(MinGenerator)).to.equal(1);
+      expect(d6MinRoll.value).to.equal(1);
     });
 
     it('should request a maximum roll equal to its number of sides', () => {
-        expect(new BasicDie(6).roll(MaxGenerator)).to.equal(6);
+        expect(d6MaxRoll.value).to.equal(6);
+    });
+
+    it('should have a face render equal to its roll value', () => {
+      expect(d6MaxRoll.faceRender).to.equal('6');
+    });
+
+    it('should be minimal when rolling a 1', () => {
+      expect(d6MinRoll.isMinimal).to.be.true;
+    });
+
+    it('should be maximal when rolling a value equal to its number of sides', () => {
+      expect(d6MaxRoll.isMaximal).to.be.true;
+    });
+
+    it('should not be maximal when rolling a value of 1 when number of sides is > 1', () => {
+      expect(d6MinRoll.isMaximal).to.be.false;
+    });
+
+    it('should not be minimal when rolling a value greater than 1', () => {
+      expect(d6MaxRoll.isMinimal).to.be.false;
     });
   })
 });

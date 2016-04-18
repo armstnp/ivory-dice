@@ -5,10 +5,10 @@ class ResultBuilder {
     this.rolls = [];
     this.total = 0;
 
-    this.addRoll = function(rollValue) {
-      let passed = condition(rollValue);
+    this.addRoll = function(roll) {
+      let passed = condition(roll.value);
       this.rolls.push({
-        value: rollValue,
+        ...roll,
         passed: passed
       });
       if(passed) this.total += 1;
@@ -32,8 +32,8 @@ export class ConditionalCountPool {
     this.roll = function(generator) {
       let builder = new ResultBuilder(diePredicate);
       for(let i = 0; i < quantity; i++){
-        let rollValue = die.roll(generator);
-        builder.addRoll(rollValue);
+        let roll = die.roll(generator);
+        builder.addRoll(roll);
       }
       return builder.build();
     };

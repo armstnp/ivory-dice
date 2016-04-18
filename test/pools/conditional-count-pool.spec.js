@@ -6,7 +6,7 @@ import { SweepGenerator } from '../../src/generators/sweep-generator.js';
 import R from 'ramda';
 
 const createConditionalCountPool = (die, quantity, predicate) => new ConditionalCountPool(die, quantity, predicate);
-const d1 = new ConstantDie(1);
+const d1 = new BasicDie(1);
 const d6 = new BasicDie(6);
 
 describe('A conditional count pool', () => {
@@ -37,19 +37,21 @@ describe('A conditional count pool', () => {
 
     it('should return a list of all rolls and the count of all rolls when dice are given and predicate always passes', () => {
       let result = new ConditionalCountPool(d6, 5, (rollValue) => true).roll(MaxGenerator);
-      let rollValue6 = { value: 6, passed: true };
       expect(result.total).to.equal(5);
     });
 
     it('should use the provided generator to roll its dice', () => {
       let result = new ConditionalCountPool(d6, 5, (rollValue) => true).roll(MaxGenerator);
-      let rollValue6 = { value: 6, passed: true };
-      expect(result.rolls).to.eql([rollValue6, rollValue6, rollValue6, rollValue6, rollValue6]);
+      let rollValue6 = { ...(d6.roll(MaxGenerator).finalize()), passed: true };
+      expect(result.rolls.map(roll => roll.value)).to.eql([6, 6, 6, 6, 6]);
+      expect(result.rolls.map(roll => roll.passed)).to.eql([true, true, true, true, true]);
+      expect(result.total).to.equal(5);
     });
 
     it('should use the provided predicate to filter which die rolls are counted', () => {
       let result = new ConditionalCountPool(d6, 3, (rollValue) => rollValue % 2 === 1).roll(new SweepGenerator());
-      expect(result.rolls).to.eql([{ value: 1, passed: true}, { value: 2, passed: false }, { value: 3, passed: true}]);
+      expect(result.rolls.map(roll => roll.value)).to.eql([1, 2, 3]);
+      expect(result.rolls.map(roll => roll.passed)).to.eql([true, false, true]);
       expect(result.total).to.equal(2);
     });
   })

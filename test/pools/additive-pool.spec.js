@@ -5,7 +5,7 @@ import { MinGenerator, MaxGenerator } from '../../src/generators/standard-genera
 import R from 'ramda';
 
 const createAdditivePool = (die, quantity) => new AdditivePool(die, quantity);
-const d1 = new ConstantDie(1);
+const d1 = new BasicDie(1);
 const d6 = new BasicDie(6);
 
 describe('An additive pool', () => {
@@ -32,19 +32,18 @@ describe('An additive pool', () => {
 
     it('should return a list of all rolls when dice are given', () => {
       let result = new AdditivePool(d1, 5).roll(MinGenerator);
-      let rollValue1 = { value: 1 };
+      let rollValue1 = d1.roll(MinGenerator).finalize();
       expect(result.rolls).to.eql([rollValue1, rollValue1, rollValue1, rollValue1, rollValue1]);
     });
 
     it('should return the total of all rolls when dice are given', () => {
       let result = new AdditivePool(d1, 5).roll(MinGenerator);
-      let rollValue1 = { value: 1 };
       expect(result.total).to.equal(5);
     });
 
     it('should use the provided generator to roll its dice', () => {
       let result = new AdditivePool(d6, 5).roll(MaxGenerator);
-      let rollValue6 = { value: 6 };
+      let rollValue6 = d6.roll(MaxGenerator).finalize();
       expect(result.rolls).to.eql([rollValue6, rollValue6, rollValue6, rollValue6, rollValue6]);
       expect(result.total).to.equal(30);
     });

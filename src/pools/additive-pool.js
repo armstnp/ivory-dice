@@ -5,9 +5,9 @@ class ResultBuilder {
     this.rolls = [];
     this.total = 0;
 
-    this.addRoll = function(rollValue) {
-      this.rolls.push({ value: rollValue });
-      this.total += rollValue;
+    this.addRoll = function(roll) {
+      this.rolls.push(roll.finalize());
+      this.total += roll.value;
     };
 
     this.build = function() {
@@ -27,8 +27,8 @@ export class AdditivePool {
     this.roll = function(generator) {
       let builder = new ResultBuilder();
       for(let i = 0; i < quantity; i++){
-        let rollValue = die.roll(generator);
-        builder.addRoll(rollValue);
+        let roll = die.roll(generator);
+        builder.addRoll(roll);
       }
       return builder.build();
     };
