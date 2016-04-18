@@ -43,15 +43,18 @@ describe('A conditional count pool', () => {
     it('should use the provided generator to roll its dice', () => {
       let result = new ConditionalCountPool(d6, 5, (rollValue) => true).roll(MaxGenerator);
       expect(result.rolls.map(roll => roll.value)).to.eql([6, 6, 6, 6, 6]);
-      expect(result.rolls.map(roll => roll.passed)).to.eql([true, true, true, true, true]);
       expect(result.total).to.equal(5);
     });
 
     it('should use the provided predicate to filter which die rolls are counted', () => {
       let result = new ConditionalCountPool(d6, 3, (rollValue) => rollValue % 2 === 1).roll(new SweepGenerator());
       expect(result.rolls.map(roll => roll.value)).to.eql([1, 2, 3]);
-      expect(result.rolls.map(roll => roll.passed)).to.eql([true, false, true]);
       expect(result.total).to.equal(2);
+    });
+
+    it('should provide whether each die passes or fails the provided predicate', () => {
+      let result = new ConditionalCountPool(d6, 3, (rollValue) => rollValue % 2 === 1).roll(new SweepGenerator());
+      expect(result.rolls.map(roll => roll.passedCheck)).to.eql([true, false, true]);
     });
   })
 });

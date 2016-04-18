@@ -6,12 +6,12 @@ class ResultBuilder {
     this.total = 0;
 
     this.addRoll = function(roll) {
-      let passed = condition(roll.value);
+      let passedCheck = condition(roll.value);
       this.rolls.push({
         ...roll,
-        passed: passed
+        passedCheck
       });
-      if(passed) this.total += 1;
+      if(passedCheck) this.total += 1;
     };
 
     this.build = function() {
